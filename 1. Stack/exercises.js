@@ -61,7 +61,7 @@ console.log(stack)
 
 // 2. Implement every method given above using the 'object' data type.
 // Additionals:
-// Modify your stack to take max capacity as a parameter and once you exceed the size it should print message
+// Modify your stack to                                                                                                                                                                                                                                                                                                                   take max capacity as a parameter and once you exceed the size it should print message
 // "Max capacity already reached"
 
 
@@ -117,8 +117,6 @@ class ObjStack {
     }); 
     return false;
   }
-
-  
 }
 
 // Use This For Testing
