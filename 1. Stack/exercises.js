@@ -7,19 +7,58 @@
 // size() - the size of the storage
 
 class Stack {
-  constructor() {
+  constructor(storage) {
+    this.storage = storage;
   }
   isEmpty() {
+    if(this.storage.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
   push(value) {
+    this.storage += `*${value}`;
+    return this.storage;
   }
   pop() {
+    let index = this.storage.lastIndexOf('*');
+    let deletedValue = this.storage.slice(index);
+    this.storage = this.storage.substr(0, index);
+    return deletedValue;
   }
   peek() {
+    return this.storage.substr(this.storage.lastIndexOf('*'));  
   }
   size() {
+    let starCount = 0;
+    for(let i = 0; i <= this.storage.length; i++) {
+      if(String(this.storage[i]).includes('*')) {
+        starCount++;
+      }
+    }
+    return starCount+1;
   }
 }
+
+var stack = new Stack('k');
+console.log(stack.isEmpty())
+console.log(stack.push('b'))
+console.log(stack.push('hello'))
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.push('hello'))
+console.log(stack.push('world'))
+console.log(stack.peek())
+console.log(stack.size())
+console.log(stack)
+console.log(stack.push('super'))
+console.log(stack.push('mario'))
+console.log(stack.pop())
+console.log(stack.size())
+console.log(stack.peek())
+console.log(stack)
+
 
 // 2. Implement every method given above using the 'object' data type.
 // Additionals:
