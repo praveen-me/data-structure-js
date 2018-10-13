@@ -11,7 +11,7 @@ class Queue {
     this.storage = storage;
   }
   isEmpty() {
-    if(this.storage.length === 0) {
+    if (this.storage.length === 0) {
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ class Queue {
     let addValue = `${value}*`;
     let newStr = `${addValue}${this.storage}`;
     this.storage = newStr;
-    return this.storage; 
+    return this.storage;
   }
   dequeue() {
     let index = this.storage.lastIndexOf('*');
@@ -30,16 +30,16 @@ class Queue {
     return deletedValue;
   }
   peek() {
-    return this.storage.substr(0,this.storage.indexOf('*'));
+    return this.storage.substr(0, this.storage.indexOf('*'));
   }
   size() {
     let starCount = 0;
-    for(let i = 0; i <= this.storage.length; i++) {
-      if(String(this.storage[i]).includes('*')) {
+    for (let i = 0; i <= this.storage.length; i++) {
+      if (String(this.storage[i]).includes('*')) {
         starCount++;
       }
     }
-    return starCount+1;
+    return starCount + 1;
   }
 }
 
@@ -64,3 +64,62 @@ console.log(strQueue.peek());
 
 // Write a method named sort() which sorts by value
 
+class ObjQueue {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.storage = {};
+    this.i = Object.keys(this.storage).length;
+  }
+
+  isEmpty() {
+    if (this.i - 1 === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  enqueue(value) {
+    if (this.capacity < this.i + 1) {
+      return "Max Capacity Reached";
+    }
+    let lastIndex = Object.keys(this.storage).length;
+
+    this.storage[this.i] = value;
+    this.i++;
+    return this;
+  }
+
+  dequeue() {
+    let keys = Object.keys(this.storage);
+    let firstKey = keys[0];
+    delete this.storage[firstKey];
+    this.i = keys.length - 1;
+    return this;
+  }
+
+  peek() {
+    return this.storage[this.i - 1];
+  }
+
+  contains(value) {
+    if(Object.values(this.storage).includes(value)) {
+      return true;
+    }
+    return false;
+  }
+}
+
+let objQueue = new ObjQueue(3);
+console.log(objQueue.isEmpty());
+console.log(objQueue.enqueue('k'));
+console.log(objQueue.enqueue('j'));
+console.log(objQueue.enqueue('l'));
+console.log(objQueue.enqueue('p'));
+console.log(objQueue.dequeue());
+console.log(objQueue.dequeue());
+console.log(objQueue.enqueue('p'));
+console.log(objQueue.enqueue('j'));
+console.log(objQueue.enqueue('f'));
+console.log(objQueue.peek());
+console.log(objQueue.contains('p'))

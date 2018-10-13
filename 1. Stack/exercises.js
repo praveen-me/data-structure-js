@@ -61,7 +61,7 @@ console.log(stack)
 
 // 2. Implement every method given above using the 'object' data type.
 // Additionals:
-// Modify your stack to                                                                                                                                                                                                                                                                                                                   take max capacity as a parameter and once you exceed the size it should print message
+// Modify your stack to take max capacity as a parameter and once you exceed the size it should print message
 // "Max capacity already reached"
 
 
@@ -110,11 +110,9 @@ class ObjStack {
   }
 
   contains(value) {
-    Object.values(this).forEach(objValue => {
-      if(objValue === value) {
-        return true;
-      }
-    }); 
+    if(Object.values(this).includes(value)) {
+      return true;
+    }
     return false;
   }
 }
@@ -131,4 +129,5 @@ console.log(myStack.pop(), 'should be c');
 console.log(myStack.size(), 'should be 2');
 console.log(myStack.peek(), 'should be b');
 console.log(myStack.size(), 'should be 2');
-console.log(myStack.contains('b'))
+console.log(myStack)
+console.log(myStack.contains('a'))
