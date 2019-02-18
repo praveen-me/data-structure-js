@@ -10,40 +10,44 @@ class Stack {
   constructor(storage) {
     this.storage = storage;
   }
+
   isEmpty() {
-    if(this.storage.length === 0) {
+    if (this.storage.length === 0) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
+
   push(value) {
     this.storage += `*${value}`;
     return this.storage;
   }
+
   pop() {
-    let index = this.storage.lastIndexOf('*');
-    let deletedValue = this.storage.slice(index);
+    const index = this.storage.lastIndexOf('*');
+    const deletedValue = this.storage.slice(index);
     this.storage = this.storage.substr(0, index);
     return deletedValue;
   }
+
   peek() {
-    return this.storage.substr(this.storage.lastIndexOf('*'));  
+    return this.storage.substr(this.storage.lastIndexOf('*'));
   }
+
   size() {
     let starCount = 0;
-    for(let i = 0; i <= this.storage.length; i++) {
-      if(String(this.storage[i]).includes('*')) {
-        starCount++;
+    for (let i = 0; i <= this.storage.length; i += 1 ) {
+      if (String(this.storage[i]).includes('*')) {
+        starCount += 1;
       }
     }
-    return starCount+1;
+    return starCount + 1;
   }
 }
 
-var stack = new Stack('k');
-console.log(stack.isEmpty())
-console.log(stack.push('b'))
+const stack = new Stack('k');
+console.log(stack.isEmpty());
+console.log(stack.push('b'));
 console.log(stack.push('hello'))
 console.log(stack.pop())
 console.log(stack.pop())
