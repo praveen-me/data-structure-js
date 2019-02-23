@@ -3,17 +3,16 @@
  * Methods
  * 1 - add
  * 2 - remove
- * 3 - find
- * 4 - findMin
- * 5 - findMax
- * 6 - find
- * 7 - isPresent
- * 8 - isBalanced
- * 9 - findMinHeight
- * 10 - findMaxHeight
- * 11 - inOrder
- * 12 - postOrder
- * 13 - levelOrder
+ * 3 - findMin
+ * 4 - findMax
+ * 5 - find
+ * 6 - isPresent
+ * 7 - isBalanced
+ * 8 - findMinHeight
+ * 9 - findMaxHeight
+ * 10 - inOrder
+ * 11 - postOrder
+ * 12 - levelOrder
  */
 
 class Node {
@@ -54,7 +53,7 @@ class BST {
         }
         // set the data in the right branch
         // because the data is greater than then the parent node
-        if (data > node.right) {
+        if (data > node.data) {
           if (!node.right) {
             node.right = new Node(data);
             return;
@@ -119,12 +118,41 @@ class BST {
       } else if (data < node.data) { // if data is smaller that parent then it in it's left
         node.left = removeNode(node.left, data);
         return node;
-      } else { // if data is greater that parent then it in it's right
+      } else { // if data is greater that parent then it in it's right 
         node.right = removeNode(node.right, data);
         return node;
       }
     };
     removeNode(this.root, item);
+  }
+
+  find(data) {
+    let current = this.root;
+    while (current.data !== data) {
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+
+      if (current == null) {
+        return null;
+      }
+    }
+    return current;
+  }
+
+  isPresent(data) {
+    let currentItem = this.root;
+    while (currentItem) {
+      if (data === currentItem.data) return true;
+      if (data < currentItem.data) {
+        currentItem = currentItem.left;
+      } else {
+        currentItem = currentItem.right;
+      }
+    }
+    return false;
   }
 }
 
@@ -134,10 +162,14 @@ bst.add(5);
 bst.add(4);
 bst.add(3);
 bst.add(6);
+bst.add(2);
+bst.remove(5);
+bst.add(5);
 
 console.log(bst.findMax());
 console.log(bst.findMin());
-
-bst.remove(5);
+console.log(bst.find(2));
+console.log(bst.isPresent(9));
+console.log(bst.isPresent(2));
 
 console.log(bst.root);
