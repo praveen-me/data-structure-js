@@ -123,3 +123,50 @@ console.log(objQueue.enqueue('j'));
 console.log(objQueue.enqueue('f'));
 console.log(objQueue.peek());
 console.log(objQueue.contains('p'))
+
+
+// New Implementation
+// Principle - FIFO(First In First Out)
+
+function createQueue() {
+  const queue = [];
+
+  return {
+    // enqueue
+    enqueue(item) {
+      queue.unshift(item);
+    },
+
+    // dequeue
+    dequeue() {
+      queue.pop();
+    },
+
+    //peek
+    peek() {
+      return queue[queue.length - 1]
+    },
+
+    // length
+    get length() {
+      return queue.length
+    },
+
+    // isEmpty
+    isEmpty() {
+      return queue.length === 0;
+    }
+  }
+}
+
+const queue = createQueue();
+
+queue.enqueue('Queue');
+queue.enqueue('Data');
+queue.enqueue('Structure');
+
+console.log(queue.isEmpty());
+
+console.log(queue.length);
+
+console.log(queue.peek());
