@@ -142,14 +142,14 @@ function createQueue() {
       queue.pop();
     },
 
-    //peek
+    // peek
     peek() {
       return queue[queue.length - 1]
     },
 
     // length
     get length() {
-      return queue.length
+      return queue.length;
     },
 
     // isEmpty
