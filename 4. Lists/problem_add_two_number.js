@@ -63,3 +63,55 @@ var addTwoNumbers = function(l1, l2) {
     
     return listNode.getList();
 };
+
+// Solution with recusion
+var addTwoNumbers = function(l1, l2) {
+    let node = null;
+    const carry = arguments[2];
+
+    if(l1 || l2) {
+        const val1 = l1? l1.val: 0;
+        const val2 = l2? l2.val: 0;
+        const next1 = l1 ? l1.next: null;
+        const next2 = l2 ? l2.next : null;
+
+        const sum = carry ? val1 + val2 + 1 : val1 + val2;
+        node = new ListNode(sum % 10);
+        node.next = addTwoNumbers(next1, next2, sum > 9);
+    } else if(carry) {
+        node = new ListNode(1);
+    }
+
+    return node
+}
+
+// Solution with while loop;
+var addTwoNumbers = function(l1, l2) {
+    let sum = 0;
+    let currentNode = new ListNode(0);
+    let result = currentNode
+
+    while(l1 || l2) {
+        
+        if(l1) {
+            sum += l1.val
+            l1 = l1.next
+        }
+        
+        if(l2) {
+            sum += l2.val
+            l2 = l2.next
+        }
+
+        currentNode.next = new ListNode(sum % 10)
+        currentNode = currentNode.next
+
+        sum = sum > 9 ? 1: 0
+    }
+
+    if(sum) {
+        currentNode.next = new ListNode(sum)
+    }
+
+    return result.next
+}
