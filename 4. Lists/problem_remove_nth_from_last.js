@@ -41,3 +41,23 @@
 
     return result;
 };
+
+// Solution 2
+var removeNthFromEnd = function(head, n) {
+    let result = new ListNode(0, head);
+    let first = result;
+    let second = result;
+    
+    for(let i = 1; i <= n; i++) {
+        first = first.next;
+    }
+        
+    while(first.next !== null) {
+        first = first.next;
+        second = second.next
+    }
+    
+    second.next = second.next.next;
+    
+    return result.next
+};
