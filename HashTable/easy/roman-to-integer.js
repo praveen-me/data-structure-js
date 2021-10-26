@@ -121,3 +121,68 @@ var romanToInt = function (s) {
 
   return total;
 };
+
+// Solution 2
+
+var romanToInt = function (s) {
+  const romanNumberMap = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+
+  const splittedRomanNumeral = s.split("");
+  let currentIndex = 0;
+
+  let total = 0;
+  let totalNumeralLength = splittedRomanNumeral.length;
+
+  while (currentIndex < splittedRomanNumeral.length) {
+    let currentCharacter = splittedRomanNumeral[currentIndex];
+    let value;
+
+    const hasNextCharacter = currentIndex + 1 < totalNumeralLength;
+
+    let increaseIndexByTwo = false;
+
+    if (
+      hasNextCharacter &&
+      (currentCharacter === "I" ||
+        currentCharacter === "X" ||
+        currentCharacter === "C")
+    ) {
+      const nextCharacter = splittedRomanNumeral[currentIndex + 1];
+
+      if (
+        (currentCharacter === "I" &&
+          (nextCharacter === "V" || nextCharacter === "X")) ||
+        (currentCharacter === "X" &&
+          (nextCharacter === "L" || nextCharacter === "C")) ||
+        (currentCharacter === "C" &&
+          (nextCharacter === "D" || nextCharacter === "M"))
+      ) {
+        value =
+          romanNumberMap[nextCharacter] - romanNumberMap[currentCharacter];
+        increaseIndexByTwo = true;
+      } else {
+        value = romanNumberMap[currentCharacter];
+      }
+    } else {
+      value = romanNumberMap[currentCharacter];
+    }
+
+    total += value;
+
+    if (increaseIndexByTwo) {
+      currentIndex += 2;
+    } else {
+      currentIndex++;
+    }
+  }
+
+  return total;
+};
